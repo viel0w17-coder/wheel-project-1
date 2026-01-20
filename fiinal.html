@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vòng Quay Giảm Giá - T.Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Font chữ kiến trúc chuyên nghiệp */
+            background: linear-gradient(135deg, #e0f7fa, #b0bec5); /* Nền xanh dương nhạt và xám kiến trúc */
+            color: #37474f;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); /* Hình nền tòa nhà kiến trúc thực tế từ Unsplash */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9); /* Nền trắng trong suốt */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative; /* Để pointer absolute trong container */
+        }
+        h1 {
+            color: #045a25; /* Xanh dương kiến trúc */
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .logo {
+            background-image: url(https://scontent.fhan5-7.fna.fbcdn.net/v/t39.30808-6/615080126_1935700994028978_250307501927590498_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG314e4BmyHd12VtK63PNqvtOW54pp0_G605bnimnT8bgrA5CWeZdWzK-Z5c3rBBxgcdrhYuAGTWSMo-wZQ3MuG&_nc_ohc=64JfjOAKSxQQ7kNvwF_CB--&_nc_oc=AdlKa6DC4tWiNCFeHH9bfhhJxSCSIqASn3MA8cxRIX6YrPGzX_AkZoOl12IfKJi30HYLT7NYE3oFZdoMc6y9ojLk&_nc_zt=23&_nc_ht=scontent.fhan5-7.fna&_nc_gid=wlGIH0qx2eHSbYBx0Bl4_g&oh=00_AfoxVZY4b9c3F6wYwTZZBF3Hx2cKPNxtZ9tOwuIl7jXmIA&oe=696BEB71);
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .wheel-container {
+            width: 300px;
+            height: 300px ;
+            border-radius: 50%;
+            position: relative;
+            background: conic-gradient(
+                #ff6b6b 0deg 72deg,   /* 3% */
+                #4ecdc4 72deg 144deg, /* 5% */
+                #45b7d1 144deg 216deg, /* 8% */
+                #f9ca24 216deg 288deg, /* 10% */
+                #f0932b 288deg 360deg  /* 12% */
+            );
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Quay mượt mà trong 3s */
+            margin: 20px auto;
+        }
+        .pointer {
+            position: absolute;
+            top: 400px; /* Điều chỉnh để pointer chỉ vào tâm vòng quay (tính toán dựa trên padding, logo, etc.) */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #d32f2f; /* Pointer đỏ nổi bật */
+            z-index: 10;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #01579b, #0277bd); /* Gradient xanh kiến trúc */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        button:disabled {
+            background: #b0bec5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .gift-box {
+            display: none;
+            margin-top: 50px;
+            animation: openBox 1s ease-out;
+        }
+        .gift-box img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+        .discount {
+            color: #d32f2f; /* Đỏ cho phần trăm */
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        @keyframes openBox {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .h3{
+            color: #d32f2f; /* số điện thoại */
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://scontent.fhan5-3.fna.fbcdn.net/v/t39.30808-6/616113640_1936403217292089_4004960243157107117_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGWvYpHMMwdrvI1yrOMxq3OZVQXjP5Z7FplVBeM_lnsWjkbP9fMSBXFruqXQAXXRBzxRD8E43kfcSk1r_cazROy&_nc_ohc=5O2UVCXhtXQQ7kNvwF16NRq&_nc_oc=Adlo5tp93WmBid6o71TEbsdy-iCxI_XvLjwpA0qlm5dvkjldxzMvqNEi1PgfnvFiKl-YC7DeHFJh_IsSrcsNheqe&_nc_zt=23&_nc_ht=scontent.fhan5-3.fna&_nc_gid=uOrRjahw6nDMAcyCHAwC3A&oh=00_Afr9uegAUrtoLQTQjpnng7tOXVtRVDQKv_tU6BsK2229_w&oe=6974C42B" alt="Logo T.Home" class="logo"> <!-- Logo giả lập, thay bằng URL thực -->
+        <h1>VÒNG QUAY MAY MẮN VOUCHER GIẢM GIÁ THIẾT KẾ TỔ ẤM TRỌN GÓI T.HOME </h1>
+        <p>Quay để nhận ưu đãi giảm giá chi phí thiết kế nội thất trọn gói.</p>
+        
+        <div class="pointer"></div> <!-- Pointer đứng yên, đặt trước wheel-container -->
+        
+        <div class="wheel-container">
+            <!-- SVG để thêm text cho các phần thưởng ở giữa mỗi màu -->
+            <svg width="300" height="300" viewBox="0 0 300 300" style="position: absolute; top: 0; left: 0;">
+                <!-- Tính toán vị trí text ở giữa mỗi phần (tâm ở 150,150, bán kính 120) -->
+                <text x="210" y="80" fill="white" font-size="22" font-weight="bold" text-anchor="middle">3%</text> <!-- Góc 36deg -->
+                <text x="240" y="185" fill="white" font-size="22" font-weight="bold" text-anchor="middle">5%</text> <!-- Góc 108deg -->
+                <text x="155" y="240" fill="white" font-size="22" font-weight="bold" text-anchor="middle">8%</text> <!-- Góc 180deg -->
+                <text x="70" y="185" fill="white" font-size="22" font-weight="bold" text-anchor="middle">10%</text> <!-- Góc 252deg -->
+                <text x="95" y="80" fill="white" font-size="22" font-weight="bold" text-anchor="middle">12%</text> <!-- Góc 324deg -->
+            </svg>
+        </div>
+        
+        <button id="spinButton">Quay Ngay</button>
+        
+        <div class="gift-box" id="giftBox">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2dwMzJ5a3B2anYwdWgzOXNpbDU4YnVicWcwZ3Nxc3J5eGZleTUydCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/g9582DNuQppxC/giphy.gif" alt="Hộp quà mở"> <!-- Hình hộp quà thực tế từ Unsplash -->
+            <p>Chúc mừng bạn đã được giảm <span class="discount" id="discountValue"></span> chi phí thiết kế trọn gói nội thất tại T.Home!</p>
+            <p> liên hệ tư vấn - 086.910.86.68</p>
+        </div>
+    </div>
+
+    <script>
+        const wheelContainer = document.querySelector('.wheel-container');
+        const spinButton = document.getElementById('spinButton');
+        const giftBox = document.getElementById('giftBox');
+        const discountValue = document.getElementById('discountValue');
+        
+        const prizes = [3, 5, 8, 10, 12]; // Các phần thưởng
+        const anglePerSegment = 360 / prizes.length; // 72 độ mỗi ngăn
+        let hasSpun = false;
+        
+        spinButton.addEventListener('click', () => {
+            if (hasSpun) return;
+            hasSpun = true;
+            spinButton.disabled = true;
+            
+            const randomIndex = Math.floor(Math.random() * prizes.length);
+            // Quay nhiều vòng (5 vòng) + dừng đúng giữa ngăn (offset 36 độ để pointer chỉ giữa)
+            const rotation = 360 * 5 + (randomIndex * anglePerSegment) + (anglePerSegment / 2);
+            
+            wheelContainer.style.transform = `rotate(${rotation}deg)`;
+            
+            setTimeout(() => {
+                wheelContainer.style.display = 'none';
+                giftBox.style.display = 'block';
+                discountValue.textContent = prizes[randomIndex] + '%';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
