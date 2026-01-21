@@ -44,11 +44,11 @@
             border-radius: 50%;
             position: relative;
             background: conic-gradient(
-                #ff6b6b 0deg 72deg,   /* 3% */
-                #4ecdc4 72deg 144deg, /* 5% */
-                #45b7d1 144deg 216deg, /* 8% */
-                #f9ca24 216deg 288deg, /* 10% */
-                #f0932b 288deg 360deg  /* 12% */
+                #ff6b6b 0deg 72deg,   /* 1% */
+                #4ecdc4 72deg 144deg, /* 2% */
+                #45b7d1 144deg 216deg, /* 3% */
+                #f9ca24 216deg 288deg, /* 4% */
+                #f0932b 288deg 360deg  /* 5% */
             );
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
             transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Quay mượt mà trong 3s */
@@ -149,7 +149,7 @@
         const giftBox = document.getElementById('giftBox');
         const discountValue = document.getElementById('discountValue');
         
-        const prizes = [3, 5, 8, 10, 12]; // Các phần thưởng
+        const prizes = [1, 2, 3, 4, 5]; // Các phần thưởng
         const anglePerSegment = 360 / prizes.length; // 72 độ mỗi ngăn
         let hasSpun = false;
         
