@@ -47,8 +47,8 @@
                 #ff6b6b 0deg 72deg,   /* 1% */
                 #4ecdc4 72deg 144deg, /* 2% */
                 #45b7d1 144deg 216deg, /* 3% */
-                #f9ca24 216deg 288deg, /* 4% */
-                #f0932b 288deg 360deg  /* 5% */
+                #f9ca24 216deg 288deg, /* Miễn phí thiết kế */
+                #f0932b 288deg 360deg  /* 4% */
             );
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
             transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Quay mượt mà trong 3s */
@@ -129,17 +129,19 @@
                 <text x="210" y="80" fill="white" font-size="22" font-weight="bold" text-anchor="middle">1%</text> <!-- Góc 36deg -->
                 <text x="240" y="185" fill="white" font-size="22" font-weight="bold" text-anchor="middle">2%</text> <!-- Góc 108deg -->
                 <text x="155" y="240" fill="white" font-size="22" font-weight="bold" text-anchor="middle">3%</text> <!-- Góc 180deg -->
-                <text x="70" y="185" fill="white" font-size="22" font-weight="bold" text-anchor="middle">4%</text> <!-- Góc 252deg -->
-                <text x="95" y="80" fill="white" font-size="22" font-weight="bold" text-anchor="middle">5%</text> <!-- Góc 324deg -->
+                <text x="66" y="175" fill="white" font-size="15" font-weight="bold" text-anchor="middle">Miễn phí thiết kế</text> <!-- Góc 252deg -->
+                <text x="95" y="80" fill="white" font-size="22" font-weight="bold" text-anchor="middle">4%</text> <!-- Góc 324deg -->
             </svg>
         </div>
         
         <button id="spinButton">Quay Ngay</button>
-        
+         
         <div class="gift-box" id="giftBox">
             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2dwMzJ5a3B2anYwdWgzOXNpbDU4YnVicWcwZ3Nxc3J5eGZleTUydCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/g9582DNuQppxC/giphy.gif" alt="Hộp quà mở"> <!-- Hình hộp quà thực tế từ Unsplash -->
-            <p>Chúc mừng bạn đã được giảm <span class="discount" id="discountValue"></span> chi phí thiết kế trọn gói nội thất tại T.Home!</p>
-            <p> liên hệ tư vấn - 086.910.86.68</p>
+            <p id="congratMessage">Chúc mừng bạn đã được giảm <span class="discount" id="discountValue"></span> chi phí thiết kế trọn gói nội thất tại T.Home!</p>
+            <p>liên hệ tư vấn - 086.910.86.68</p>
+            <p>"Chụp màn hình gửi zalo trên"</p>
+            <p>Chỉ áp dụng từ 17/02 - 18/04</p>
         </div>
     </div>
 
@@ -148,8 +150,9 @@
         const spinButton = document.getElementById('spinButton');
         const giftBox = document.getElementById('giftBox');
         const discountValue = document.getElementById('discountValue');
+        const congratMessage = document.getElementById('congratMessage');
         
-        const prizes = [1, 2, 3, 4, 5]; // Các phần thưởng
+        const prizes = ['1%', '2%', '3%', 'Miễn phí thiết kế', '4%']; // Các phần thưởng khớp với vòng quay
         const anglePerSegment = 360 / prizes.length; // 72 độ mỗi ngăn
         let hasSpun = false;
         
@@ -167,7 +170,13 @@
             setTimeout(() => {
                 wheelContainer.style.display = 'none';
                 giftBox.style.display = 'block';
-                discountValue.textContent = prizes[randomIndex] + '%';
+                const prize = prizes[randomIndex];
+                discountValue.textContent = prize;
+                if (prize === 'Miễn phí thiết kế') {
+                    congratMessage.innerHTML = 'Chúc mừng bạn đã được <span class="discount" id="discountValue">' + prize + '</span> trọn gói nội thất tại T.Home!';
+                } else {
+                    congratMessage.innerHTML = 'Chúc mừng bạn đã được giảm <span class="discount" id="discountValue">' + prize + '</span> chi phí thiết kế trọn gói nội thất tại T.Home!';
+                }
             }, 3000);
         });
     </script>
